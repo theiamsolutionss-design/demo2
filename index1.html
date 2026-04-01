@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart AI Real Estate Bot</title>
+  <style>
+    body { font-family: Arial; }
+    #chat { width: 350px; border: 1px solid #ccc; padding: 10px; }
+    .msg { margin: 5px 0; }
+    input { width: 100%; padding: 5px; }
+  </style>
+</head>
+<body>
+
+<div id="chat">
+  <div class="msg">👋 Ask me something like "2BHK under 50 lakh"</div>
+</div>
+
+<input id="input" placeholder="Type here..." onkeypress="handle(event)">
+
+<script>
+const properties = [
+  {name: "2BHK Pune", price: 4500000},
+  {name: "2BHK Mumbai", price: 7000000},
+  {name: "1BHK Pune", price: 3000000}
+];
+
+function handle(e) {
+  if(e.key === "Enter") {
+    let input = document.getElementById("input").value;
+    let chat = document.getElementById("chat");
+
+    chat.innerHTML += `<div class="msg">You: ${input}</div>`;
+
+    let result = properties.filter(p => p.price <= 5000000);
+
+    if(result.length > 0) {
+      result.forEach(p => {
+        chat.innerHTML += `<div class="msg">🏠 ${p.name} - ₹${p.price}</div>`;
+      });
+    } else {
+      chat.innerHTML += `<div class="msg">No properties found</div>`;
+    }
+
+    document.getElementById("input").value = "";
+  }
+}
+</script>
+
+</body>
+</html>
